@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WMS L.F.S.P | Sistema Integrado</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <style>
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            height: 100%; 
+            width: 100%; 
+            overflow: hidden; /* Remove rolagem dupla */
+            background-color: #111; /* Fundo escuro enquanto carrega */
+        }
+        
+        iframe { 
+            display: block; 
+            border: none; 
+            width: 100vw; 
+            height: 100vh; 
+        }
+    </style>
+</head>
+<body>
+
+    <iframe id="appFrame" allow="camera; microphone; geolocation"></iframe>
+
+    <script>
+        // --- CONFIGURAÇÃO ---
+        // Seu Link Oficial (Já inserido)
+        const LINK_GOOGLE = "https://script.google.com/macros/s/AKfycbwGDzTKBnc9FE5VoIUpA1t6wy-jowiuXFEPW92YsBqQBw0lRrwWRl-wXzjegUqZJMXnPw/exec"; 
+        // --------------------
+
+        // Lógica de Roteamento Dinâmica (WMS, Crachá e Dashboard)
+        function carregarSistema() {
+            const params = new URLSearchParams(window.location.search);
+            const pagina = params.get('page'); 
+
+            const iframe = document.getElementById('appFrame');
+
+            // Roteador Inteligente
+            if (pagina === 'cracha') {
+                iframe.src = LINK_GOOGLE + "?page=cracha";
+                document.title = "Gerador de Crachás";
+            } 
+            else if (pagina === 'dashboard') {
+                iframe.src = LINK_GOOGLE + "?page=dashboard";
+                document.title = "Dashboard de Abastecimento";
+            } 
+            else {
+                iframe.src = LINK_GOOGLE;
+                document.title = "WMS L.F.S.P | Robot Edition";
+            }
+        }
+
+        carregarSistema();
+    </script>
+
+</body>
+</html>
